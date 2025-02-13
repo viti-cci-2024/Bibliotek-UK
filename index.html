@@ -18,14 +18,14 @@
   <div class="container-fluid py-4 px-5">
     <header class="mb-4">
       <div class="d-flex align-items-center bg-primary bg-gradient text-white p-3 rounded shadow-lg">
-        <h1 class="h3">Bibliothèque</h1>
+        <h1 class="h3">Our Library</h1>
         <button id="auth-button" class="btn btn-light ms-3 shadow-sm p-3 rounded-pill">
-          <i class="bi-alarm"></i> Connexion
+          <i class="bi-alarm"></i> Login
         </button>
         <div class="ms-auto d-flex align-items-center">
-          <span id="user-status">Statut : Non connecté</span>
+          <span id="user-status">Statut : Logged out</span>
         </div>
-        <button id="members-button" class="btn btn-light ms-3" style="display: none;"><i class="bi bi-person-lines-fill"></i>&nbsp;&nbsp;Gestion des Membres</button>
+        <button id="members-button" class="btn btn-light ms-3" style="display: none;"><i class="bi bi-person-lines-fill"></i>&nbsp;&nbsp;Member management</button>
       </div>
     </header>
   </div>
@@ -37,8 +37,8 @@
         <!-- Section gauche : Liste -->
         <div class="col-lg-8 col-md-7 mb-4" id="left">
           <div class="d-flex justify-content-start mb-3 gap-3">
-            <button id="show-books" class="btn btn-primary">Afficher les livres</button>
-            <button id="clear-books" class="btn btn-danger">Masquer la liste</button>
+            <button id="show-books" class="btn btn-primary">Display Books</button>
+            <button id="clear-books" class="btn btn-danger">Hide List</button>
           </div>
           <div id="books-list" class="table-responsive mb-4"></div>
           <div id="search-results" class="table-responsive"></div>
@@ -47,20 +47,20 @@
         <!-- Section droite : Recherche et ajout -->
         <div class="col-lg-4 col-md-5" id="right">
           <div class="mb-4">
-            <h2 class="h4">Recherche</h2>
+            <h2 class="h4">Search</h2>
             <form class="row g-3">
               <div class="col-md-6">
-                <label for="search-author" class="form-label">Rechercher par auteur</label>
+                <label for="search-author" class="form-label">Search by Author</label>
                 <input type="text" id="search-author" class="form-control">
                 <div class="mt-2">
-                  <button id="search-author-btn" type="button" class="btn btn-info">Recherche auteur</button>
+                  <button id="search-author-btn" type="button" class="btn btn-info">Search Author</button>
                 </div>
               </div>
               <div class="col-md-6">
-                <label for="search-title" class="form-label">Rechercher par titre</label>
+                <label for="search-title" class="form-label">Search by Title</label>
                 <input type="text" id="search-title" class="form-control">
                 <div class="mt-2">
-                  <button id="search-title-btn" type="button" class="btn btn-info">Recherche titre</button>
+                  <button id="search-title-btn" type="button" class="btn btn-info">Search Title</button>
                 </div>
               </div>
             </form>
@@ -68,13 +68,13 @@
   
           <!-- Section Ajouter un livre -->
           <div id="add-book-section" style="display: none;">
-            <h2>Ajouter un Livre</h2>
+            <h2>Add a book</h2>
             <div id="add-book-form">
-              <label for="book-title" class="form-label">Titre :</label>
-              <input type="text" id="book-title" class="form-control" placeholder="Titre du livre">
-              <label for="book-author" class="form-label">Auteur :</label>
-              <input type="text" id="book-author" class="form-control" placeholder="Auteur du livre">
-              <button id="add-book-button" class="btn btn-success mt-2">Ajouter le Livre</button>
+              <label for="book-title" class="form-label">Title :</label>
+              <input type="text" id="book-title" class="form-control" placeholder="Book Title">
+              <label for="book-author" class="form-label">Author :</label>
+              <input type="text" id="book-author" class="form-control" placeholder="Book Author">
+              <button id="add-book-button" class="btn btn-success mt-2">Add Book</button>
             </div>
           </div>
         </div>
@@ -93,13 +93,13 @@
               <h2>Connexion</h2>
               <div id="auth-error" class="error" role="alert" aria-live="assertive"></div>
               <label for="auth-name">Nom</label>
-              <input type="text" id="auth-name" class="form-control" placeholder="Nom">
+              <input type="text" id="auth-name" class="form-control" placeholder="Last Name">
               <label for="auth-firstname">Prénom</label>
-              <input type="text" id="auth-firstname" class="form-control" placeholder="Prénom">
-              <label for="auth-password">Mot de passe</label>
-              <input type="password" id="auth-password" class="form-control" placeholder="Mot de passe">
-              <button id="login-button" class="btn btn-primary mt-3">Se connecter</button>
-              <button class="btn btn-secondary mt-2" id="close-modal">Fermer</button>
+              <input type="text" id="auth-firstname" class="form-control" placeholder="First Name">
+              <label for="auth-password">Password</label>
+              <input type="password" id="auth-password" class="form-control" placeholder="Password">
+              <button id="login-button" class="btn btn-primary mt-3">Log in</button>
+              <button class="btn btn-secondary mt-2" id="close-modal">Close</button>
             </div>
           </div>
         </div>
@@ -117,12 +117,12 @@
             <div class="modal-content p-4">
               <h2>Modifier le Livre</h2>
               <div id="edit-error" class="error" role="alert" aria-live="assertive"></div>
-              <label for="edit-title">Titre</label>
-              <input type="text" id="edit-title" class="form-control" placeholder="Nouveau titre">
-              <label for="edit-author">Auteur</label>
-              <input type="text" id="edit-author" class="form-control" placeholder="Nouvel auteur">
-              <button id="validate-edit-button" class="btn btn-success mt-3">Valider</button>
-              <button class="btn btn-secondary mt-2" id="close-edit-modal">Quitter</button>
+              <label for="edit-title">Title</label>
+              <input type="text" id="edit-title" class="form-control" placeholder="New Title">
+              <label for="edit-author">Author</label>
+              <input type="text" id="edit-author" class="form-control" placeholder="New Author">
+              <button id="validate-edit-button" class="btn btn-success mt-3">Submit</button>
+              <button class="btn btn-secondary mt-2" id="close-edit-modal">Quit</button>
             </div>
           </div>
         </div>

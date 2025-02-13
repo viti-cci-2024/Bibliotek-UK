@@ -45,11 +45,11 @@ let bookToEdit = null;
 // Valide le formulaire de connexion
 function validateLoginForm(name, firstname, password) {
   const errors = [];
-  if (!name) errors.push("Le champ Nom est requis.");
-  if (!firstname) errors.push("Le champ Prénom est requis.");
-  if (!password) errors.push("Le champ Mot de passe est requis.");
+  if (!name) errors.push("The Name field is required.");
+  if (!firstname) errors.push("The First Name field is required.");
+  if (!password) errors.push("The Password field is required.");
   if (password && password.length < 4) {
-    errors.push("Le mot de passe doit contenir au moins 4 caractères.");
+    errors.push("The password must be at least 4 characters long.");
   }
   return errors;
 }
@@ -284,7 +284,7 @@ const displaySearchResults = (results, container) => {
   container.innerHTML = "";
 
   if (results.length === 0) {
-    container.innerHTML = "<p>Aucun résultat trouvé.</p>";
+    container.innerHTML = "<p>No results found</p>";
     return;
   }
 
@@ -299,10 +299,10 @@ const displaySearchResults = (results, container) => {
   table.innerHTML = `
         <thead>
             <tr>
-                <th>Titre</th>
-                <th>Auteur</th>
-                <th>État</th>
-                ${isConnected ? "<th>Emprunteur</th>" : ""}
+                <th>Title</th>
+                <th>Author</th>
+                <th>Status</th>
+                ${isConnected ? "<th>Borrower</th>" : ""}
                 ${isConnected ? "<th>Actions</th>" : ""}
             </tr>
         </thead>
@@ -429,7 +429,7 @@ const displayBooks = async (db, container) => {
     container.innerHTML = "";
 
     if (books.length === 0) {
-      container.innerHTML = "<p>Aucun livre disponible.</p>";
+      container.innerHTML = "<p>No books available.</p>";
       return;
     }
 
@@ -444,10 +444,10 @@ const displayBooks = async (db, container) => {
     table.innerHTML = `
             <thead>
                 <tr>
-                    <th>Titre</th>
-                    <th>Auteur</th>
-                    <th>État</th>
-                    ${isConnected ? "<th>Emprunteur</th>" : ""}
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Status</th>
+                    ${isConnected ? "<th>Borrower</th>" : ""}
                     ${isConnected ? "<th>Actions</th>" : ""}
                 </tr>
             </thead>
@@ -477,7 +477,7 @@ const displayBooks = async (db, container) => {
                           Modifier
                         </button>
                         <button class="btn btn-secondary btn-sm delete-book" data-title="${book.titre}">
-                        <i class="bi bi-trash"></i> Supprimer
+                        <i class="bi bi-trash"></i> Remove
                         </button>
                       </div>
                     </td>`
@@ -547,7 +547,7 @@ const displayBooks = async (db, container) => {
     }
   } catch (error) {
     console.error("Erreur lors de l'affichage des livres :", error);
-    container.innerHTML = "<p>Erreur lors de la récupération des livres.</p>";
+    container.innerHTML = "<p>Failed to retrieve books.</p>";
   }
 };
 
@@ -600,7 +600,7 @@ searchAuthorButton.addEventListener("click", async () => {
   const query = searchAuthorInput.value.trim();
   if (!query) {
     searchResultsDiv.innerHTML =
-      "<p>Veuillez entrer un auteur pour rechercher.</p>";
+      "<p>Please enter an author to search.</p>";
     return;
   }
 
@@ -611,7 +611,7 @@ searchAuthorButton.addEventListener("click", async () => {
   } catch (error) {
     console.error("Erreur lors de la recherche par auteur :", error);
     searchResultsDiv.innerHTML =
-      "<p>Erreur lors de la recherche. Veuillez réessayer.</p>";
+      "<p>Search error. Please try again.</p>";
   }
 });
 
@@ -619,7 +619,7 @@ searchTitleButton.addEventListener("click", async () => {
   const query = searchTitleInput.value.trim();
   if (!query) {
     searchResultsDiv.innerHTML =
-      "<p>Veuillez entrer un titre pour rechercher.</p>";
+      "<p>Please enter an title to search.</p>";
     return;
   }
 
@@ -630,7 +630,7 @@ searchTitleButton.addEventListener("click", async () => {
   } catch (error) {
     console.error("Erreur lors de la recherche par titre :", error);
     searchResultsDiv.innerHTML =
-      "<p>Erreur lors de la recherche. Veuillez réessayer.</p>";
+      "<p>Search error. Please try again.</p>";
   }
 });
 
@@ -696,12 +696,12 @@ loginButton.addEventListener("click", async () => {
       authModal.style.display = "none";
       updateAuthButton();
     } else {
-      displayErrors(["Identifiants incorrects."], authErrorDiv);
+      displayErrors(["Incorrect credentials."], authErrorDiv);
     }
   } catch (error) {
     console.error("Erreur lors de la connexion :", error);
     displayErrors(
-      ["Une erreur est survenue. Veuillez réessayer."],
+      ["Something went wrong. Please try again."],
       authErrorDiv
     );
   }
@@ -722,7 +722,7 @@ validateEditButton.addEventListener("click", async () => {
 
   if (!newTitle || !newAuthor) {
     displayErrors(
-      ["Veuillez remplir tous les champs (Titre et Auteur)."],
+      ["Please complete all fields (Title and Author)."],
       editErrorDiv
     );
     return;
@@ -742,7 +742,7 @@ validateEditButton.addEventListener("click", async () => {
       });
 
       if (existingBook) {
-        displayErrors(["Un livre avec ce titre existe déjà."], editErrorDiv);
+        displayErrors(["A book with this title already exists."], editErrorDiv);
         return;
       }
     }
@@ -759,7 +759,7 @@ validateEditButton.addEventListener("click", async () => {
   } catch (error) {
     console.error("Erreur lors de la modification du livre :", error);
     displayErrors(
-      ["Erreur lors de la modification. Veuillez réessayer."],
+      ["Error during the update. Please try again."],
       editErrorDiv
     );
   }
@@ -774,13 +774,13 @@ const updateAuthButton = () => {
   if (isConnected) {
     authButton.innerHTML = '<i class="bi bi-box-arrow-right"></i>&nbsp;&nbsp;Déconnexion';
     membersButton.style.display = "inline-block";
-    userStatusSpan.innerHTML = `🟢 Statut : Connecté (${currentUser.statut})`;
+    userStatusSpan.innerHTML = `🟢 Status : Connected (${currentUser.statut})`;
     userStatusSpan.classList.add("connected");
     userStatusSpan.classList.remove("disconnected");
   } else {
     authButton.innerHTML = '<i class="bi bi-person"></i> Connexion';
     membersButton.style.display = "none";
-    userStatusSpan.innerHTML = "🔴 Statut : Non connecté";
+    userStatusSpan.innerHTML = "🔴 Status : logged out";
     userStatusSpan.classList.add("disconnected");
     userStatusSpan.classList.remove("connected");
   }

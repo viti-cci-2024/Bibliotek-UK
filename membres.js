@@ -28,13 +28,13 @@ const memberModalInstance = new bootstrap.Modal(memberModal);
 function validateMemberForm(nom, prenom, statut, motDePasse) {
   const errors = [];
 
-  if (!nom) errors.push("Le champ Nom est requis.");
-  if (!prenom) errors.push("Le champ Prénom est requis.");
-  if (!statut) errors.push("Le champ Statut doit être sélectionné.");
+  if (!nom) errors.push("The Last Name field is required.");
+  if (!prenom) errors.push("The First Name field is required.");
+  if (!statut) errors.push("The Status field must be selected.");
   if (!motDePasse) {
-    errors.push("Le champ Mot de passe est requis.");
+    errors.push("The Password field is required.");
   } else if (motDePasse.length < 4) {
-    errors.push("Le mot de passe doit comporter au moins 4 caractères.");
+    errors.push("The password must be at least 4 characters long.");
   }
 
   return errors;
@@ -107,7 +107,7 @@ const displayMembers = async (db) => {
     membersListDiv.innerHTML = ""; // Réinitialise la liste
 
     if (members.length === 0) {
-      membersListDiv.innerHTML = "<p>Aucun membre enregistré.</p>";
+      membersListDiv.innerHTML = "<p>No members found.</p>";
       return;
     }
 
@@ -154,7 +154,7 @@ const displayMembers = async (db) => {
         if (member) {
           isEditing = true;
           memberToEdit = member;
-          memberModalTitle.textContent = "Modifier un Membre";
+          memberModalTitle.textContent = "Update Member";
           memberNomInput.value = member.nom;
           memberPrenomInput.value = member.prenom;
           memberStatutSelect.value = member.statut;
@@ -189,7 +189,7 @@ const displayMembers = async (db) => {
   } catch (error) {
     console.error("Erreur lors de l'affichage des membres :", error);
     membersListDiv.innerHTML =
-      "<p>Erreur lors de la récupération des membres.</p>";
+      "<p>Error retrieving members.</p>";
   }
 };
 
@@ -247,10 +247,10 @@ const saveMember = async (db) => {
     // Réinitialiser la modale après ajout ou modification
     isEditing = false;
     memberToEdit = null;
-    memberModalTitle.textContent = "Ajouter un Membre";
+    memberModalTitle.textContent = "Add Member";
     memberNomInput.value = "";
     memberPrenomInput.value = "";
-    memberStatutSelect.value = "Membre";
+    memberStatutSelect.value = "Member";
     memberPasswordInput.value = "";
     memberErrorDiv.textContent = "";
     memberModalInstance.hide(); // Ferme la modale
@@ -260,7 +260,7 @@ const saveMember = async (db) => {
   } catch (error) {
     console.error("Erreur lors de l'enregistrement du membre :", error);
     displayErrors(
-      ["Erreur lors de l'enregistrement. Veuillez réessayer."],
+      ["Error while saving. Please try again."],
       memberErrorDiv
     );
   }
@@ -299,14 +299,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (!isConnected || !currentUser || currentUser.statut !== "Administrateur") {
     // Afficher une alerte et rediriger l'utilisateur vers index.html
-    alert("Désolé, vous n'avez pas le droit d'accéder à cette page.");
+    alert("Sorry, you are not allowed to access this page.");
     window.location.href = "index.html";
   } else {
     // Afficher les informations de l'utilisateur connecté
     console.log("Utilisateur connecté :", currentUser);
     document.getElementById(
       "user-status"
-    ).textContent = `Statut : Connecté (${currentUser.nom} ${currentUser.prenom}, ${currentUser.statut})`;
+    ).textContent = `Status : Connected (${currentUser.nom} ${currentUser.prenom}, ${currentUser.statut})`;
     document.getElementById("auth-button").innerHTML = '<i class="bi bi-box-arrow-right"></i>&nbsp;&nbsp;Déconnexion';
   }
 
@@ -318,10 +318,10 @@ document.addEventListener("DOMContentLoaded", () => {
       // Bouton pour ajouter un membre
       addMemberButton.addEventListener("click", () => {
         isEditing = false;
-        memberModalTitle.textContent = "Ajouter un Membre";
+        memberModalTitle.textContent = "Add a member";
         memberNomInput.value = "";
         memberPrenomInput.value = "";
-        memberStatutSelect.value = "Membre";
+        memberStatutSelect.value = "Member";
         memberPasswordInput.value = "";
         memberErrorDiv.textContent = "";
         memberModalInstance.show(); // Ouvre la modale
@@ -351,7 +351,7 @@ document.addEventListener("DOMContentLoaded", () => {
     localStorage.removeItem("currentUser");
 
     // Mettre à jour l'affichage du statut de l'utilisateur
-    userStatusSpan.textContent = "Statut : Non connecté";
+    userStatusSpan.textContent = "Status : Logged out";
     userStatusSpan.classList.remove("connected");
     authButton.textContent = "Connexion";
 
