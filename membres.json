@@ -1,0 +1,30 @@
+[
+  {
+    "id": 1,
+    "nom": "Brouille",
+    "prenom": "Jean",
+    "statut": "Administrateur",
+    "motDePasse": "test"
+  },
+  {
+    "id": 2,
+    "nom": "Curieu",
+    "prenom": "Marie",
+    "statut": "Membre",
+    "motDePasse": "test"
+  },
+  {
+    "id": 3,
+    "nom": "Emique",
+    "prenom": "Paul",
+    "statut": "Membre",
+    "motDePasse": "test"
+  },
+  {
+    "id": 4,
+    "nom": "Tissée",
+    "prenom": "Sophie",
+    "statut": "Membre",
+    "motDePasse": "test"
+  }
+]

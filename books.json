@@ -1,0 +1,25 @@
+[
+  {
+    "titre": "Dune",
+    "auteur": "Frank Herbert",
+    "etat": "Emprunté",
+    "emprunteur": "Jean Brouille"
+  },
+  { "titre": "1984", "auteur": "George Orwell", "etat": "Disponible" },
+  {
+    "titre": "Le Meilleur des Mondes",
+    "auteur": "Aldous Huxley",
+    "etat": "Disponible"
+  },
+  { "titre": "Fahrenheit 451", "auteur": "Ray Bradbury", "etat": "Disponible" },
+  { "titre": "Fondation", "auteur": "Isaac Asimov", "etat": "Disponible" },
+  { "titre": "Neuromancien", "auteur": "William Gibson", "etat": "Disponible" },
+  { "titre": "Hyperion", "auteur": "Dan Simmons", "etat": "Disponible" },
+  { "titre": "Les Robots", "auteur": "Isaac Asimov", "etat": "Disponible" },
+  { "titre": "Solaris", "auteur": "Stanislaw Lem", "etat": "Disponible" },
+  {
+    "titre": "La Guerre des Mondes",
+    "auteur": "H.G. Wells",
+    "etat": "Disponible"
+  }
+]
