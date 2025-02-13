@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Library</title>
+  <title>Bibliothèque</title>
   <!-- Bootstrap -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
@@ -18,63 +18,63 @@
   <div class="container-fluid py-4 px-5">
     <header class="mb-4">
       <div class="d-flex align-items-center bg-primary bg-gradient text-white p-3 rounded shadow-lg">
-        <h1 class="h3">Library</h1>
+        <h1 class="h3">Bibliothèque</h1>
         <button id="auth-button" class="btn btn-light ms-3 shadow-sm p-3 rounded-pill">
-          <i class="bi-alarm"></i> Login
+          <i class="bi-alarm"></i> Connexion
         </button>
         <div class="ms-auto d-flex align-items-center">
-          <span id="user-status">Status: Not connected</span>
+          <span id="user-status">Statut : Non connecté</span>
         </div>
-        <button id="members-button" class="btn btn-light ms-3" style="display: none;"><i class="bi bi-person-lines-fill"></i>&nbsp;&nbsp;Manage Members</button>
+        <button id="members-button" class="btn btn-light ms-3" style="display: none;"><i class="bi bi-person-lines-fill"></i>&nbsp;&nbsp;Gestion des Membres</button>
       </div>
     </header>
   </div>
-  <!-- End Navbar -->
+  <!-- Fin Navbar -->
 
   <main>
     <div class="container-fluid py-4 px-5">
       <div class="row">
-        <!-- Left Section: List -->
+        <!-- Section gauche : Liste -->
         <div class="col-lg-8 col-md-7 mb-4" id="left">
           <div class="d-flex justify-content-start mb-3 gap-3">
-            <button id="show-books" class="btn btn-primary">Show Books</button>
-            <button id="clear-books" class="btn btn-danger">Hide List</button>
+            <button id="show-books" class="btn btn-primary">Afficher les livres</button>
+            <button id="clear-books" class="btn btn-danger">Masquer la liste</button>
           </div>
           <div id="books-list" class="table-responsive mb-4"></div>
           <div id="search-results" class="table-responsive"></div>
         </div>
   
-        <!-- Right Section: Search and Add -->
+        <!-- Section droite : Recherche et ajout -->
         <div class="col-lg-4 col-md-5" id="right">
           <div class="mb-4">
-            <h2 class="h4">Search</h2>
+            <h2 class="h4">Recherche</h2>
             <form class="row g-3">
               <div class="col-md-6">
-                <label for="search-author" class="form-label">Search by Author</label>
+                <label for="search-author" class="form-label">Rechercher par auteur</label>
                 <input type="text" id="search-author" class="form-control">
                 <div class="mt-2">
-                  <button id="search-author-btn" type="button" class="btn btn-info">Search Author</button>
+                  <button id="search-author-btn" type="button" class="btn btn-info">Recherche auteur</button>
                 </div>
               </div>
               <div class="col-md-6">
-                <label for="search-title" class="form-label">Search by Title</label>
+                <label for="search-title" class="form-label">Rechercher par titre</label>
                 <input type="text" id="search-title" class="form-control">
                 <div class="mt-2">
-                  <button id="search-title-btn" type="button" class="btn btn-info">Search Title</button>
+                  <button id="search-title-btn" type="button" class="btn btn-info">Recherche titre</button>
                 </div>
               </div>
             </form>
           </div>
   
-          <!-- Add Book Section -->
+          <!-- Section Ajouter un livre -->
           <div id="add-book-section" style="display: none;">
-            <h2>Add a Book</h2>
+            <h2>Ajouter un Livre</h2>
             <div id="add-book-form">
-              <label for="book-title" class="form-label">Title:</label>
-              <input type="text" id="book-title" class="form-control" placeholder="Book Title">
-              <label for="book-author" class="form-label">Author:</label>
-              <input type="text" id="book-author" class="form-control" placeholder="Book Author">
-              <button id="add-book-button" class="btn btn-success mt-2">Add the Book</button>
+              <label for="book-title" class="form-label">Titre :</label>
+              <input type="text" id="book-title" class="form-control" placeholder="Titre du livre">
+              <label for="book-author" class="form-label">Auteur :</label>
+              <input type="text" id="book-author" class="form-control" placeholder="Auteur du livre">
+              <button id="add-book-button" class="btn btn-success mt-2">Ajouter le Livre</button>
             </div>
           </div>
         </div>
@@ -83,10 +83,58 @@
   </main>
   
 
-  <!-- Login Modal -->
+  <!-- Modal Connexion -->
   <div class="modal" id="auth-modal">
     <div class="container-fluid bg-dark bg-opacity-50 d-flex align-items-center">
       <div class="container-sm">
         <div class="row justify-content-center">
           <div class="col-md-6">
-            <div class="modal-content
+            <div class="modal-content p-4">
+              <h2>Connexion</h2>
+              <div id="auth-error" class="error" role="alert" aria-live="assertive"></div>
+              <label for="auth-name">Nom</label>
+              <input type="text" id="auth-name" class="form-control" placeholder="Nom">
+              <label for="auth-firstname">Prénom</label>
+              <input type="text" id="auth-firstname" class="form-control" placeholder="Prénom">
+              <label for="auth-password">Mot de passe</label>
+              <input type="password" id="auth-password" class="form-control" placeholder="Mot de passe">
+              <button id="login-button" class="btn btn-primary mt-3">Se connecter</button>
+              <button class="btn btn-secondary mt-2" id="close-modal">Fermer</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Fin Modal Connexion -->
+
+  <!-- Modal Modifier Livre -->
+  <div class="modal" id="edit-modal">
+    <div class="container-fluid bg-dark bg-opacity-50 d-flex align-items-center">
+      <div class="container-sm">
+        <div class="row justify-content-center">
+          <div class="col-md-6">
+            <div class="modal-content p-4">
+              <h2>Modifier le Livre</h2>
+              <div id="edit-error" class="error" role="alert" aria-live="assertive"></div>
+              <label for="edit-title">Titre</label>
+              <input type="text" id="edit-title" class="form-control" placeholder="Nouveau titre">
+              <label for="edit-author">Auteur</label>
+              <input type="text" id="edit-author" class="form-control" placeholder="Nouvel auteur">
+              <button id="validate-edit-button" class="btn btn-success mt-3">Valider</button>
+              <button class="btn btn-secondary mt-2" id="close-edit-modal">Quitter</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Fin Modal Modifier Livre -->
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
+  <script src="script.js"></script>
+</body>
+
+</html>
