@@ -772,7 +772,7 @@ validateEditButton.addEventListener("click", async () => {
  */
 const updateAuthButton = () => {
   if (isConnected) {
-    authButton.innerHTML = '<i class="bi bi-box-arrow-right"></i>&nbsp;&nbsp;Déconnexion';
+    authButton.innerHTML = '<i class="bi bi-box-arrow-right"></i>&nbsp;&nbsp;Deconnexion';
     membersButton.style.display = "inline-block";
     userStatusSpan.innerHTML = `🟢 Status : Connected (${currentUser.statut})`;
     userStatusSpan.classList.add("connected");
