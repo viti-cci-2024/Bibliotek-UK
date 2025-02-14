@@ -134,8 +134,8 @@ const displayMembers = async (db) => {
                 <td>${member.prenom}</td>
                 <td>${member.statut}</td>
                 <td>
-                    <button class="action-button edit-button btn btn-warning" data-id="${member.id}">Modifier</button>
-                    <button class="action-button delete-button btn btn-danger" data-id="${member.id}">Supprimer</button>
+                    <button class="action-button edit-button btn btn-warning" data-id="${member.id}">Modify</button>
+                    <button class="action-button delete-button btn btn-danger" data-id="${member.id}">Remove</button>
                 </td>
             `;
       tbody.appendChild(tr);
@@ -297,7 +297,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const isConnected = localStorage.getItem("isConnected");
   const currentUser = JSON.parse(localStorage.getItem("currentUser"));
 
-  if (!isConnected || !currentUser || currentUser.statut !== "Administrateur") {
+  if (!isConnected || !currentUser || currentUser.statut !== "Administrator") {
     // Afficher une alerte et rediriger l'utilisateur vers index.html
     alert("Sorry, you are not allowed to access this page.");
     window.location.href = "index.html";
@@ -307,7 +307,7 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById(
       "user-status"
     ).textContent = `Status : Connected (${currentUser.nom} ${currentUser.prenom}, ${currentUser.statut})`;
-    document.getElementById("auth-button").innerHTML = '<i class="bi bi-box-arrow-right"></i>&nbsp;&nbsp;Déconnexion';
+    document.getElementById("auth-button").innerHTML = '<i class="bi bi-box-arrow-right"></i>&nbsp;&nbsp;Deconnexion';
   }
 
   // Initialisation de la base de données et de l'affichage des membres
