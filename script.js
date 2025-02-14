@@ -302,7 +302,7 @@ const displaySearchResults = (results, container) => {
                 <th>Title</th>
                 <th>Author</th>
                 <th>Status</th>
-                ${isConnected ? "<th>Emprunteur</th>" : ""}
+                ${isConnected ? "<th>Borrower</th>" : ""}
                 ${isConnected ? "<th>Actions</th>" : ""}
             </tr>
         </thead>
