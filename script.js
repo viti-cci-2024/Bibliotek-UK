@@ -45,11 +45,11 @@ let bookToEdit = null;
 // Valide le formulaire de connexion
 function validateLoginForm(name, firstname, password) {
   const errors = [];
-  if (!name) errors.push("The Name field is required.");
-  if (!firstname) errors.push("The First Name field is required.");
-  if (!password) errors.push("The Password field is required.");
+  if (!name) errors.push("Last Name is required");
+  if (!firstname) errors.push("First Name is required");
+  if (!password) errors.push("Password is required.");
   if (password && password.length < 4) {
-    errors.push("The password must be at least 4 characters long.");
+    errors.push("Password must contain at least 4 characters.");
   }
   return errors;
 }
@@ -203,7 +203,7 @@ const updateBook = async (db, oldTitle, updatedBook) => {
         };
         booksStore.put(updatedBook).onerror = () => {
           console.error(
-            "Erreur lors de la mise à jour du livre :",
+            "Error while updating the book",
             booksStore.error
           );
           reject(booksStore.error);
@@ -211,7 +211,7 @@ const updateBook = async (db, oldTitle, updatedBook) => {
       };
       booksStore.delete(oldTitle).onerror = () => {
         console.error(
-          "Erreur lors de la suppression de l'ancien livre :",
+          "Error while deleting the book",
           booksStore.error
         );
         reject(booksStore.error);
@@ -258,7 +258,7 @@ const addBook = async (db, title, author) => {
     const newBook = {
       titre: title,
       auteur: author,
-      etat: "Disponible",
+      etat: "Available",
       emprunteur: null,
     };
 
@@ -302,7 +302,7 @@ const displaySearchResults = (results, container) => {
                 <th>Title</th>
                 <th>Author</th>
                 <th>Status</th>
-                ${isConnected ? "<th>Borrower</th>" : ""}
+                ${isConnected ? "<th>Emprunteur</th>" : ""}
                 ${isConnected ? "<th>Actions</th>" : ""}
             </tr>
         </thead>
@@ -315,7 +315,7 @@ const displaySearchResults = (results, container) => {
           <td>${book.titre}</td>
           <td>${book.auteur}</td>
           <td class="${
-            book.etat === "Disponible" ? "text-success fs-6" : "text-danger fs-6"
+            book.etat === "Available" ? "text-success fs-6" : "text-danger fs-6"
           }">${book.etat}</td>
           ${
             isConnected
@@ -328,15 +328,15 @@ const displaySearchResults = (results, container) => {
               <td>
                   <div class="d-flex flex-wrap justify-content-around">
                       ${
-                        book.etat === "Disponible"
-                          ? `<button class="btn btn-info btn-sm borrow-book" data-title="${book.titre}">Emprunter</button>`
-                          : `<button class="btn btn-warning btn-sm return-book" data-title="${book.titre}">Retourner</button>`
+                        book.etat === "Available"
+                          ? `<button class="btn btn-info btn-sm borrow-book" data-title="${book.titre}">Borrow</button>`
+                          : `<button class="btn btn-warning btn-sm return-book" data-title="${book.titre}">Return</button>`
                       }
                       <button class="btn btn-primary btn-sm edit-book" data-title="${book.titre}">
-                        Modifier
+                        Modify
                       </button>
                       <button class="btn btn-secondary btn-sm delete-book" data-title="${book.titre}">
-                      <i class="bi bi-trash"></i> Supprimer
+                      <i class="bi bi-trash"></i> Remove
                       </button>
                   </div>
               </td>`
@@ -357,7 +357,7 @@ const displaySearchResults = (results, container) => {
         const title = event.target.getAttribute("data-title");
         const book = results.find((b) => b.titre === title);
         if (book) {
-          book.etat = "Emprunté";
+          book.etat = "Borrowed";
           book.emprunteur = `${currentUser.prenom} ${currentUser.nom}`;
           const db = await initializeIndexedDB();
           await updateBook(db, book.titre, book);
@@ -375,7 +375,7 @@ const displaySearchResults = (results, container) => {
         const title = event.target.getAttribute("data-title");
         const book = results.find((b) => b.titre === title);
         if (book) {
-          book.etat = "Disponible";
+          book.etat = "Available";
           book.emprunteur = null;
           const db = await initializeIndexedDB();
           await updateBook(db, book.titre, book);
@@ -447,7 +447,7 @@ const displayBooks = async (db, container) => {
                     <th>Title</th>
                     <th>Author</th>
                     <th>Status</th>
-                    ${isConnected ? "<th>Borrower</th>" : ""}
+                    ${isConnected ? "<th>Emprunteur</th>" : ""}
                     ${isConnected ? "<th>Actions</th>" : ""}
                 </tr>
             </thead>
@@ -460,7 +460,7 @@ const displayBooks = async (db, container) => {
                 <td>${book.titre}</td>
                 <td>${book.auteur}</td>
                 <td class="fs-6 ${
-                  book.etat === "Disponible" ? "text-success fs-6" : "text-danger fs-6"
+                  book.etat === "Available" ? "text-success fs-6" : "text-danger fs-6"
                 }">${book.etat}</td>
                 ${isConnected ? `<td class="fs-6">${book.emprunteur || "N/A"}</td>` : ""}
                 ${
@@ -469,12 +469,12 @@ const displayBooks = async (db, container) => {
                     <td>
                       <div class="d-flex justify-content-around">
                         ${
-                          book.etat === "Disponible"
-                            ? `<button class="btn btn-info btn-sm borrow-book" data-title="${book.titre}">Emprunter</button>`
-                            : `<button class="btn btn-warning btn-sm return-book" data-title="${book.titre}">Retourner</button>`
+                          book.etat === "Available"
+                            ? `<button class="btn btn-info btn-sm borrow-book" data-title="${book.titre}">Borrow</button>`
+                            : `<button class="btn btn-warning btn-sm return-book" data-title="${book.titre}">Return</button>`
                         }
                         <button class="btn btn-primary btn-sm edit-book" data-title="${book.titre}">
-                          Modifier
+                          Modify
                         </button>
                         <button class="btn btn-secondary btn-sm delete-book" data-title="${book.titre}">
                         <i class="bi bi-trash"></i> Remove
@@ -498,7 +498,7 @@ const displayBooks = async (db, container) => {
           const title = event.target.getAttribute("data-title");
           const book = books.find((b) => b.titre === title);
           if (book) {
-            book.etat = "Emprunté";
+            book.etat = "Borrowed";
             book.emprunteur = `${currentUser.prenom} ${currentUser.nom}`;
             await updateBook(db, book.titre, book);
             await displayBooks(db, container);
@@ -512,7 +512,7 @@ const displayBooks = async (db, container) => {
           const title = event.target.getAttribute("data-title");
           const book = books.find((b) => b.titre === title);
           if (book) {
-            book.etat = "Disponible";
+            book.etat = "Available";
             book.emprunteur = null;
             await updateBook(db, book.titre, book);
             await displayBooks(db, container);
@@ -547,7 +547,7 @@ const displayBooks = async (db, container) => {
     }
   } catch (error) {
     console.error("Erreur lors de l'affichage des livres :", error);
-    container.innerHTML = "<p>Failed to retrieve books.</p>";
+    container.innerHTML = "<p>Error while retrieving books.</p>";
   }
 };
 
@@ -600,7 +600,7 @@ searchAuthorButton.addEventListener("click", async () => {
   const query = searchAuthorInput.value.trim();
   if (!query) {
     searchResultsDiv.innerHTML =
-      "<p>Please enter an author to search.</p>";
+      "<p>Please enter an author to search for</p>";
     return;
   }
 
@@ -611,7 +611,7 @@ searchAuthorButton.addEventListener("click", async () => {
   } catch (error) {
     console.error("Erreur lors de la recherche par auteur :", error);
     searchResultsDiv.innerHTML =
-      "<p>Search error. Please try again.</p>";
+      "<p>Error while searching. Please try again.</p>";
   }
 });
 
@@ -619,7 +619,7 @@ searchTitleButton.addEventListener("click", async () => {
   const query = searchTitleInput.value.trim();
   if (!query) {
     searchResultsDiv.innerHTML =
-      "<p>Please enter an title to search.</p>";
+      "<p>Please enter a title to search for.</p>";
     return;
   }
 
@@ -630,7 +630,7 @@ searchTitleButton.addEventListener("click", async () => {
   } catch (error) {
     console.error("Erreur lors de la recherche par titre :", error);
     searchResultsDiv.innerHTML =
-      "<p>Search error. Please try again.</p>";
+      "<p>Error while searching. Please try again.</p>";
   }
 });
 
@@ -699,9 +699,9 @@ loginButton.addEventListener("click", async () => {
       displayErrors(["Incorrect credentials."], authErrorDiv);
     }
   } catch (error) {
-    console.error("Erreur lors de la connexion :", error);
+    console.error("Erreur while connecting :", error);
     displayErrors(
-      ["Something went wrong. Please try again."],
+      ["An error occurred. Please try again."],
       authErrorDiv
     );
   }
@@ -722,7 +722,7 @@ validateEditButton.addEventListener("click", async () => {
 
   if (!newTitle || !newAuthor) {
     displayErrors(
-      ["Please complete all fields (Title and Author)."],
+      ["Please fill in all the fields (Title and Author)."],
       editErrorDiv
     );
     return;
@@ -759,7 +759,7 @@ validateEditButton.addEventListener("click", async () => {
   } catch (error) {
     console.error("Erreur lors de la modification du livre :", error);
     displayErrors(
-      ["Error during the update. Please try again."],
+      ["Error while editing. Please try again."],
       editErrorDiv
     );
   }
@@ -780,7 +780,7 @@ const updateAuthButton = () => {
   } else {
     authButton.innerHTML = '<i class="bi bi-person"></i> Connexion';
     membersButton.style.display = "none";
-    userStatusSpan.innerHTML = "🔴 Status : logged out";
+    userStatusSpan.innerHTML = "🔴 Status : logged off";
     userStatusSpan.classList.add("disconnected");
     userStatusSpan.classList.remove("connected");
   }
