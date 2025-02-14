@@ -307,7 +307,7 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById(
       "user-status"
     ).textContent = `Status : Connected (${currentUser.nom} ${currentUser.prenom}, ${currentUser.statut})`;
-    document.getElementById("auth-button").innerHTML = '<i class="bi bi-box-arrow-right"></i>&nbsp;&nbsp;Deconnexion';
+    document.getElementById("auth-button").innerHTML = '<i class="bi bi-box-arrow-right"></i>&nbsp;&nbsp;Log Out';
   }
 
   // Initialisation de la base de données et de l'affichage des membres
@@ -353,7 +353,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Mettre à jour l'affichage du statut de l'utilisateur
     userStatusSpan.textContent = "Status : Logged out";
     userStatusSpan.classList.remove("connected");
-    authButton.textContent = "Connexion";
+    authButton.textContent = "Log In";
 
     // Rediriger vers la page index.html
     window.location.href = "index.html";
