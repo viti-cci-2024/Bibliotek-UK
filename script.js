@@ -772,13 +772,13 @@ validateEditButton.addEventListener("click", async () => {
  */
 const updateAuthButton = () => {
   if (isConnected) {
-    authButton.innerHTML = '<i class="bi bi-box-arrow-right"></i>&nbsp;&nbsp;Deconnexion';
+    authButton.innerHTML = '<i class="bi bi-box-arrow-right"></i>&nbsp;&nbsp;Log Out';
     membersButton.style.display = "inline-block";
     userStatusSpan.innerHTML = `🟢 Status : Connected (${currentUser.statut})`;
     userStatusSpan.classList.add("connected");
     userStatusSpan.classList.remove("disconnected");
   } else {
-    authButton.innerHTML = '<i class="bi bi-person"></i> Connexion';
+    authButton.innerHTML = '<i class="bi bi-person"></i> Log In';
     membersButton.style.display = "none";
     userStatusSpan.innerHTML = "🔴 Status : logged off";
     userStatusSpan.classList.add("disconnected");
